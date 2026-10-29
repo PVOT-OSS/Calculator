@@ -74,7 +74,8 @@ public class HistoryFragment extends Fragment {
             }
             return onOptionsItemSelected(item);
         });
-        toolbar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
+        toolbar.setNavigationOnClickListener(
+                v -> requireActivity().getOnBackPressedDispatcher().onBackPressed());
         return view;
     }
 

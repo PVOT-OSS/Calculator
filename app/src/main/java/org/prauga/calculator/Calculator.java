@@ -45,6 +45,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
@@ -310,6 +311,21 @@ public class Calculator extends AppCompatActivity
         setupEdgeToEdge();
         setSupportActionBar(findViewById(R.id.toolbar));
 
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (!stopActionModeOrContextMenu()) {
+                    final HistoryFragment historyFragment = getHistoryFragment();
+                    if (mMainCalculator.getCurrentState() == R.id.end_state
+                        && historyFragment != null) {
+                        mMainCalculator.transitionToStart();
+                        return;
+                    }
+                }
+                moveTaskToBack(true);
+            }
+        });
+
         // Hide all default options in the ActionBar.
         getSupportActionBar().setDisplayOptions(0);
 
@@ -515,19 +531,6 @@ public class Calculator extends AppCompatActivity
             }
         }
         return super.dispatchTouchEvent(e);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (!stopActionModeOrContextMenu()) {
-            final HistoryFragment historyFragment = getHistoryFragment();
-            if (mMainCalculator.getCurrentState() == R.id.end_state
-                && historyFragment != null) {
-                mMainCalculator.transitionToStart();
-                return;
-            }
-        }
-        moveTaskToBack(true);
     }
 
     @Override
@@ -1028,7 +1031,7 @@ public class Calculator extends AppCompatActivity
                 // TODO: It's not clear what we should really do here. This is an initial hack.
                 onClearEnd();
                 mEvaluatorCallback.onMemoryStateChanged();
-                onBackPressed();
+                getOnBackPressedDispatcher().onBackPressed();
             } else if (Evaluator.TIMEOUT_DIALOG_TAG.equals(fragment.getTag())) {
                 // Timeout extension request.
                 mEvaluator.setLongTimeout();

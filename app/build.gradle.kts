@@ -5,7 +5,6 @@
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
 }
 
 val versionMajor = rootProject.extra["versionMajor"] as Int
@@ -15,13 +14,13 @@ val computedVersionCode = rootProject.extra["computedVersionCode"] as Int
 val computedVersionName = rootProject.extra["computedVersionName"] as String
 
 android {
-    compileSdk = 35
+    compileSdk { version = release(37) }
     namespace = "org.prauga.calculator"
 
     defaultConfig {
         applicationId = "org.prauga.calculator"
         minSdk = 31
-        targetSdk = 35
+        targetSdk = 37
         versionCode = computedVersionCode
         versionName = computedVersionName
 
@@ -41,7 +40,7 @@ android {
             // Includes the default ProGuard rules files.
             setProguardFiles(
                 listOf(
-                    getDefaultProguardFile("proguard-android.txt"),
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
                     "proguard-rules.pro"
                 )
             )

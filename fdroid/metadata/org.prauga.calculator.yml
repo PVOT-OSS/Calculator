@@ -11,8 +11,8 @@ IssueTracker: https://github.com/PVOT-OSS/PvotCalculator/issues
 WebSite: ""
 Categories:
   - Calculator
-CurrentVersion: "1.0.0"
-CurrentVersionCode: 10000
+CurrentVersion: "1.0.1"
+CurrentVersionCode: 10001
 Description: |
   Calculator gives exact answers: numbers like √2, π and e stay exact while
   you work, and you can scroll any result for as many digits as you want.
@@ -23,9 +23,9 @@ RepoType: git
 Repo: https://github.com/PVOT-OSS/PvotCalculator.git
 
 Builds:
-  - versionName: 1.0.0
-    versionCode: 10000
-    commit: v1.0.0
+  - versionName: 1.0.1
+    versionCode: 10001
+    commit: v1.0.1
     subdir: app
     gradle:
       - yes

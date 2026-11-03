@@ -3,9 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-plugins {
-    alias(libs.plugins.android.application)
-}
+plugins { alias(libs.plugins.android.application) }
 
 val versionMajor = rootProject.extra["versionMajor"] as Int
 val versionMinor = rootProject.extra["versionMinor"] as Int
@@ -41,7 +39,7 @@ android {
             setProguardFiles(
                 listOf(
                     getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
+                    "proguard-rules.pro",
                 )
             )
         }
@@ -50,9 +48,7 @@ android {
             applicationIdSuffix = ".dev"
         }
     }
-    buildFeatures {
-        buildConfig = true
-    }
+    buildFeatures { buildConfig = true }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17

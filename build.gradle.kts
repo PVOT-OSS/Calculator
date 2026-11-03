@@ -3,9 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-plugins {
-    alias(libs.plugins.android.application) apply false
-}
+plugins { alias(libs.plugins.android.application) apply false }
 
 ext {
     val versionMajor = 1

@@ -33,5 +33,5 @@ dependencies {
     implementation(libs.androidx.webkit)
     implementation(libs.material)
     implementation(libs.pvot.design.system.views)
-    implementation(libs.crcalc)
+    implementation(project(":crcalc"))
 }

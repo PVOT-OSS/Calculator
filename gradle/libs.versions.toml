@@ -6,7 +6,6 @@
 [versions]
 agp = "9.5.1"
 kotlin = "2.4.21"
-crcalc = "1.0"
 gridlayout = "1.0.0"
 material = "1.14.0"
 webkit = "1.7.0-alpha02"
@@ -20,7 +19,6 @@ composeRules = "0.6.8"
 [libraries]
 androidx-gridlayout = { group = "androidx.gridlayout", name = "gridlayout", version.ref = "gridlayout" }
 androidx-webkit = { group = "androidx.webkit", name = "webkit", version.ref = "webkit" }
-crcalc = { group = "com.hp", name = "crcalc", version.ref = "crcalc" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 pvot-design-system-views = { group = "com.prauga.pvot", name = "design-system-views", version.ref = "pvot" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -33,8 +31,10 @@ compose-rules-detekt = { group = "io.nlopez.compose.rules", name = "detekt", ver
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 detekt = { id = "dev.detekt", version.ref = "detekt" }
 pvot-android-application = { id = "pvot.android.application" }
+pvot-jvm-library = { id = "pvot.jvm.library" }
 pvot-quality-spotless = { id = "pvot.quality.spotless" }
 pvot-quality-detekt = { id = "pvot.quality.detekt" }

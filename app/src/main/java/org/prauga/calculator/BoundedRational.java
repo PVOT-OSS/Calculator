@@ -451,6 +451,9 @@ public class BoundedRational {
         // First handle cases in which huge exponents could give compact results.
         if (reduced.mDen.equals(BigInteger.ONE)) {
             if (reduced.mNum.equals(BigInteger.ZERO)) {
+                if (expSign < 0) {
+                    throw new ZeroDivisionException();
+                }
                 return ZERO;
             }
             if (reduced.mNum.equals(BigInteger.ONE)) {

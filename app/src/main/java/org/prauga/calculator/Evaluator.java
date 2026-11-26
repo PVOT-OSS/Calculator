@@ -605,8 +605,10 @@ public class Evaluator implements CalculatorExpr.ExprResolver {
                 return new InitialResult(res, initResult, precOffset, initDisplayOffset);
             } catch (CalculatorExpr.SyntaxException e) {
                 return new InitialResult(R.string.error_syntax);
-            } catch (UnifiedReal.ZeroDivisionException e) {
+            } catch (UnifiedReal.ZeroDivisionException | BoundedRational.ZeroDivisionException e) {
                 return new InitialResult(R.string.error_zero_divide);
+            } catch (UnifiedReal.TooLargeException e) {
+                return new InitialResult(R.string.error_too_large);
             } catch(ArithmeticException e) {
                 return new InitialResult(R.string.error_nan);
             } catch(CR.PrecisionOverflowException e) {

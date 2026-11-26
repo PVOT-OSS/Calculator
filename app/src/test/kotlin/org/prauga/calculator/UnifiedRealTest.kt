@@ -5,8 +5,10 @@
 
 package org.prauga.calculator
 
+import assertk.assertFailure
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import assertk.assertions.isInstanceOf
 import assertk.assertions.isTrue
 import org.junit.Test
 
@@ -59,5 +61,20 @@ class UnifiedRealTest {
         val testSubject = UnifiedReal.E.pow(UnifiedReal.PI)
 
         assertThat(testSubject.toStringTruncated(20)).isEqualTo("23.14069263277926900572")
+    }
+
+    @Test
+    fun `zero to a negative power is a division by zero`() {
+        val testSubject = UnifiedReal.ZERO
+
+        assertFailure { testSubject.pow(UnifiedReal.MINUS_ONE) }
+            .isInstanceOf<BoundedRational.ZeroDivisionException>()
+    }
+
+    @Test
+    fun `factorial beyond the supported range is too large`() {
+        val testSubject = UnifiedReal(2_000_000)
+
+        assertFailure { testSubject.fact() }.isInstanceOf<UnifiedReal.TooLargeException>()
     }
 }

@@ -5,6 +5,8 @@
 
 package org.prauga.calculator;
 
+import androidx.annotation.NonNull;
+
 import java.math.BigInteger;
 import com.hp.creals.CR;
 import com.hp.creals.UnaryCRFunction;
@@ -610,6 +612,12 @@ public class UnifiedReal {
         }
     }
 
+    public static class TooLargeException extends ArithmeticException {
+        public TooLargeException(@NonNull String message) {
+            super(message);
+        }
+    }
+
     /**
      * Return the reciprocal.
      */
@@ -1147,7 +1155,7 @@ public class UnifiedReal {
         }
         if (asBI.bitLength() > 20) {
             // Will fail.  LongValue() may not work. Punt now.
-            throw new ArithmeticException("Factorial argument too big");
+            throw new TooLargeException("Factorial argument too big");
         }
         BigInteger biResult = genFactorial(asBI.longValue(), 1);
         BoundedRational nRatFactor = new BoundedRational(biResult);

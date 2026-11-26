@@ -241,6 +241,8 @@
       [CHAR_LIMIT=20]
       -->
     <string name="error_zero_divide">Can\'t divide by 0</string>
+    <!-- Error displayed when a result is too large to compute, e.g. a huge factorial. [CHAR_LIMIT=20] -->
+    <string name="error_too_large">Number too large</string>
 
     <!-- Toast shown when text is copied to the clipboard. [CHAR_LIMIT=40] -->
     <string name="text_copied_toast">Text copied</string>

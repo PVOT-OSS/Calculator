@@ -61,8 +61,8 @@ Bug reports and pull requests are welcome on
 to reproduce it, the app version and your device and Android version.
 
 Sign off your commits (`git commit -s`, [DCO](https://developercertificate.org/)). Every file
-carries an SPDX header; CI runs [REUSE](https://reuse.software/) and
-[pre-commit](https://pre-commit.com/) checks on each pull request.
+carries an SPDX header; CI runs [REUSE](https://reuse.software/), Spotless, detekt, Android Lint
+and the unit tests on each pull request. `./gradlew spotlessApply` fixes formatting.
 
 ## Credits
 

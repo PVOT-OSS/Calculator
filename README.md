@@ -69,13 +69,11 @@ and the unit tests on each pull request. `./gradlew spotlessApply` fixes formatt
 - Forked from LineageOS's [ExactCalculator](https://github.com/LineageOS/android_packages_apps_ExactCalculator),
   the Android Open Source Project calculator.
 - Exact arithmetic by HP's constructive reals library (`crcalc`), Apache-2.0.
-- [Sora](https://github.com/sora-xor/sora-font) font, SIL Open Font License 1.1.
 
 ## License
 
 Copyright (c) The Android Open Source Project, The LineageOS Project and Saalim Quadri.
 
-Licensed under the [Apache License 2.0](LICENSES/Apache-2.0.txt). The Sora font is under the
-[SIL Open Font License 1.1](LICENSES/OFL-1.1.txt).
+Licensed under the [Apache License 2.0](LICENSES/Apache-2.0.txt).
 
 Google Play and the Google Play logo are trademarks of Google LLC.

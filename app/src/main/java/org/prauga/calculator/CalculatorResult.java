@@ -10,6 +10,7 @@ import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Build;
 import androidx.annotation.IntDef;
@@ -24,6 +25,7 @@ import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.ActionMode;
 import android.view.ContextMenu;
 import android.view.GestureDetector;
@@ -87,6 +89,7 @@ public class CalculatorResult extends AlignedTextView implements MenuItem.OnMenu
                             // but not with grouping separators. Since the result is not
                             // scrollable, and we do not add the exponent to max. scroll position,
                             // append an exponent insteadd of replacing trailing digits.
+    private final float mMaxTextSize;
     private final Object mWidthLock = new Object();
                             // Protects the next five fields.  These fields are only
                             // updated by the UI thread, and read accesses by the UI thread
@@ -147,6 +150,7 @@ public class CalculatorResult extends AlignedTextView implements MenuItem.OnMenu
 
     public CalculatorResult(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mMaxTextSize = getTextSize();
         mScroller = new OverScroller(context);
         mHighlightSpan = new BackgroundColorSpan(getHighlightColor());
         mExponentColorSpan = new ForegroundColorSpan(
@@ -267,6 +271,22 @@ public class CalculatorResult extends AlignedTextView implements MenuItem.OnMenu
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        final int height = MeasureSpec.getSize(heightMeasureSpec);
+        if (height > 0) {
+            fitVerticalPaddingToHeight(height);
+        }
+        final int textHeight = height - getPaddingTop() - getPaddingBottom();
+        if (textHeight > 0) {
+            final Paint paint = new Paint(getPaint());
+            paint.setTextSize(mMaxTextSize);
+            final Paint.FontMetrics metrics = paint.getFontMetrics();
+            final float lineHeightPerTextSize = (metrics.descent - metrics.ascent) / mMaxTextSize;
+            final float textSize = Math.min(mMaxTextSize, textHeight / lineHeightPerTextSize);
+            if (getTextSize() != textSize) {
+                setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+            }
+        }
+
         if (!isLaidOut()) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
             // Set a minimum height so scaled error messages won't affect our layout.

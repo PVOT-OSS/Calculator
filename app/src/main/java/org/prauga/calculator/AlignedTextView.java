@@ -19,12 +19,16 @@ import androidx.appcompat.widget.AppCompatTextView;
 public class AlignedTextView extends AppCompatTextView {
 
     private static final String LATIN_CAPITAL_LETTER = "H";
+    private static final float MAX_VERTICAL_PADDING_FRACTION = 0.4f;
 
     // temporary rect for use during layout
     private final Rect mTempRect = new Rect();
 
     private int mTopPaddingOffset;
     private int mBottomPaddingOffset;
+
+    private final int mBasePaddingTop;
+    private final int mBasePaddingBottom;
 
     public AlignedTextView(Context context) {
         this(context, null /* attrs */);
@@ -39,6 +43,20 @@ public class AlignedTextView extends AppCompatTextView {
 
         // Disable any included font padding by default.
         setIncludeFontPadding(false);
+
+        mBasePaddingTop = getPaddingTop();
+        mBasePaddingBottom = getPaddingBottom();
+    }
+
+    protected void fitVerticalPaddingToHeight(int height) {
+        final int basePadding = mBasePaddingTop + mBasePaddingBottom;
+        final float maxPadding = height * MAX_VERTICAL_PADDING_FRACTION;
+        final float scale = basePadding > maxPadding ? maxPadding / basePadding : 1f;
+        final int top = (int) (mBasePaddingTop * scale);
+        final int bottom = (int) (mBasePaddingBottom * scale);
+        if (top != getPaddingTop() || bottom != getPaddingBottom()) {
+            setPadding(getPaddingLeft(), top, getPaddingRight(), bottom);
+        }
     }
 
     @Override

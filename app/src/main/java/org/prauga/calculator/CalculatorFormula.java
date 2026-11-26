@@ -10,6 +10,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Build;
 import android.text.Layout;
@@ -44,6 +45,8 @@ public class CalculatorFormula extends AlignedTextView implements MenuItem.OnMen
     private final ClipboardManager mClipboardManager;
 
     private int mWidthConstraint = -1;
+    private static final float REFERENCE_TEXT_SIZE = 100f;
+    private float mHeightLimitTextSize = Float.MAX_VALUE;
     private ActionMode mActionMode;
     private ActionMode.Callback mPasteActionModeCallback;
     private ContextMenu mContextMenu;
@@ -83,9 +86,18 @@ public class CalculatorFormula extends AlignedTextView implements MenuItem.OnMen
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        final int height = MeasureSpec.getSize(heightMeasureSpec);
+        if (height > 0) {
+            fitVerticalPaddingToHeight(height);
+        }
+        final int textHeight = height - getPaddingTop() - getPaddingBottom();
+        if (textHeight > 0) {
+            mHeightLimitTextSize = textHeight / getLineHeightPerTextSize();
+        }
+
         if (!isLaidOut()) {
             // Prevent shrinking/resizing with our variable textSize.
-            setTextSizeInternal(TypedValue.COMPLEX_UNIT_PX, mMaximumTextSize,
+            setTextSizeInternal(TypedValue.COMPLEX_UNIT_PX, getMaximumTextSize(),
                     false /* notifyListener */);
             setMinimumHeight(getLineHeight() + getCompoundPaddingBottom()
                     + getCompoundPaddingTop());
@@ -144,26 +156,38 @@ public class CalculatorFormula extends AlignedTextView implements MenuItem.OnMen
     }
 
     public float getMinimumTextSize() {
-        return mMinimumTextSize;
+        return Math.min(mMinimumTextSize, getMaximumTextSize());
     }
 
     public float getMaximumTextSize() {
-        return mMaximumTextSize;
+        return Math.min(mMaximumTextSize, mHeightLimitTextSize);
+    }
+
+    private float getLineHeightPerTextSize() {
+        mTempPaint.set(getPaint());
+        mTempPaint.setTextSize(REFERENCE_TEXT_SIZE);
+        final Paint.FontMetrics metrics = mTempPaint.getFontMetrics();
+        return (metrics.descent - metrics.ascent) / REFERENCE_TEXT_SIZE;
     }
 
     public float getVariableTextSize(CharSequence text) {
-        if (mWidthConstraint < 0 || mMaximumTextSize <= mMinimumTextSize) {
+        final float minimumTextSize = getMinimumTextSize();
+        final float maximumTextSize = getMaximumTextSize();
+        if (mWidthConstraint < 0) {
             // Not measured, bail early.
             return getTextSize();
+        }
+        if (maximumTextSize <= minimumTextSize) {
+            return maximumTextSize;
         }
 
         // Capture current paint state.
         mTempPaint.set(getPaint());
 
         // Step through increasing text sizes until the text would no longer fit.
-        float lastFitTextSize = mMinimumTextSize;
-        while (lastFitTextSize < mMaximumTextSize) {
-            mTempPaint.setTextSize(Math.min(lastFitTextSize + mStepTextSize, mMaximumTextSize));
+        float lastFitTextSize = minimumTextSize;
+        while (lastFitTextSize < maximumTextSize) {
+            mTempPaint.setTextSize(Math.min(lastFitTextSize + mStepTextSize, maximumTextSize));
             if (Layout.getDesiredWidth(text, mTempPaint) > mWidthConstraint) {
                 break;
             }

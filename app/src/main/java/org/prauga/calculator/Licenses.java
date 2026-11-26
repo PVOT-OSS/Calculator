@@ -10,6 +10,8 @@ import android.webkit.WebView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.webkit.WebSettingsCompat;
+import androidx.webkit.WebViewFeature;
 
 public class Licenses extends AppCompatActivity {
 
@@ -24,6 +26,9 @@ public class Licenses extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
         WebView webView = requireViewById(R.id.webview);
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.ALGORITHMIC_DARKENING)) {
+            WebSettingsCompat.setAlgorithmicDarkeningAllowed(webView.getSettings(), true);
+        }
         webView.loadUrl(LICENSE_URL);
     }
 }

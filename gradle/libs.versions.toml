@@ -8,8 +8,9 @@ agp = "9.5.1"
 kotlin = "2.4.21"
 crcalc = "1.0"
 gridlayout = "1.0.0"
-material = "1.14.0-alpha09"
+material = "1.14.0"
 webkit = "1.7.0-alpha02"
+pvot = "1.0.0"
 junit = "4.13.2"
 ktfmt = "0.64"
 spotless = "8.11.0"
@@ -21,6 +22,7 @@ androidx-gridlayout = { group = "androidx.gridlayout", name = "gridlayout", vers
 androidx-webkit = { group = "androidx.webkit", name = "webkit", version.ref = "webkit" }
 crcalc = { group = "com.hp", name = "crcalc", version.ref = "crcalc" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+pvot-design-system-views = { group = "com.prauga.pvot", name = "design-system-views", version.ref = "pvot" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 compose-gradlePlugin = { group = "org.jetbrains.kotlin", name = "compose-compiler-gradle-plugin", version.ref = "kotlin" }

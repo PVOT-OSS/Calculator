@@ -28,9 +28,14 @@ dependencyResolutionManagement {
         maven("https://raw.githubusercontent.com/lineage-next/crcalc/main/.m2") {
             content { includeGroup("com.hp") }
         }
+        maven("https://pvot-oss.github.io/PvotLib/maven") {
+            content { includeGroup("com.prauga.pvot") }
+        }
     }
 }
 
 rootProject.name = "PvotCalculator"
 
 include(":app")
+
+providers.gradleProperty("pvotLibDir").orNull?.let { includeBuild(it) }

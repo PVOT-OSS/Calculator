@@ -5,7 +5,7 @@
 -->
 <resources>
 
-    <style name="Theme" parent="Theme.Material3Expressive.DayNight">
+    <style name="Theme" parent="PvotTheme">
         <item name="android:windowBackground">@color/calculator_background</item>
         <item name="android:statusBarColor">@color/display_background_color</item>
         <item name="android:windowLightStatusBar">?isLightTheme</item>
@@ -20,7 +20,7 @@
         <item name="android:layoutDirection">ltr</item>
     </style>
 
-    <style name="Theme.Licenses" parent="Theme.Material3Expressive.DayNight.NoActionBar">
+    <style name="Theme.Licenses" parent="PvotTheme">
         <item name="android:statusBarColor">?colorSurface</item>
         <item name="android:windowLightStatusBar">?isLightTheme</item>
         <item name="android:navigationBarColor">?colorSurface</item>

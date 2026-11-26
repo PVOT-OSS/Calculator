@@ -68,7 +68,8 @@ and the unit tests on each pull request. `./gradlew spotlessApply` fixes formatt
 
 - Forked from LineageOS's [ExactCalculator](https://github.com/LineageOS/android_packages_apps_ExactCalculator),
   the Android Open Source Project calculator.
-- Exact arithmetic by HP's constructive reals library (`crcalc`), Apache-2.0.
+- Exact arithmetic by HP's constructive reals library (`crcalc`, built from AOSP `external/crcalc`),
+  Apache-2.0 with the SGI and HP notices in [`LicenseRef-CRCalc`](LICENSES/LicenseRef-CRCalc.txt).
 
 ## License
 

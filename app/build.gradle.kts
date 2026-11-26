@@ -34,4 +34,5 @@ dependencies {
     implementation(libs.material)
     implementation(libs.pvot.design.system.views)
     implementation(project(":crcalc"))
+    testImplementation(libs.assertk)
 }

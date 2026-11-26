@@ -11,6 +11,7 @@ material = "1.14.0"
 webkit = "1.7.0-alpha02"
 pvot = "1.0.0"
 junit = "4.13.2"
+assertk = "0.28.1"
 ktfmt = "0.64"
 spotless = "8.11.0"
 detekt = "2.0.0-alpha.6"
@@ -22,6 +23,7 @@ androidx-webkit = { group = "androidx.webkit", name = "webkit", version.ref = "w
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 pvot-design-system-views = { group = "com.prauga.pvot", name = "design-system-views", version.ref = "pvot" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+assertk = { group = "com.willowtreeapps.assertk", name = "assertk", version.ref = "assertk" }
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 compose-gradlePlugin = { group = "org.jetbrains.kotlin", name = "compose-compiler-gradle-plugin", version.ref = "kotlin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }

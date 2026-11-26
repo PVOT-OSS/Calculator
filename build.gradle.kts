@@ -3,16 +3,17 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-plugins { alias(libs.plugins.android.application) apply false }
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.spotless) apply false
+    alias(libs.plugins.detekt) apply false
+    alias(libs.plugins.pvot.quality.spotless)
+}
 
-ext {
+extra.apply {
     val versionMajor = 1
     val versionMinor = 0
     val versionPatch = 2
-
-    set("versionMajor", versionMajor)
-    set("versionMinor", versionMinor)
-    set("versionPatch", versionPatch)
-    set("computedVersionCode", versionMajor * 10000 + versionMinor * 100 + versionPatch)
-    set("computedVersionName", "$versionMajor.$versionMinor.$versionPatch")
+    set("versionCode", versionMajor * 10000 + versionMinor * 100 + versionPatch)
+    set("versionName", "$versionMajor.$versionMinor.$versionPatch")
 }

@@ -4,17 +4,35 @@
 #
 
 [versions]
-agp = "9.5.0"
+agp = "9.5.1"
+kotlin = "2.4.21"
 crcalc = "1.0"
 gridlayout = "1.0.0"
 material = "1.14.0-alpha09"
 webkit = "1.7.0-alpha02"
+junit = "4.13.2"
+ktfmt = "0.64"
+spotless = "8.11.0"
+detekt = "2.0.0-alpha.6"
+composeRules = "0.6.8"
 
 [libraries]
 androidx-gridlayout = { group = "androidx.gridlayout", name = "gridlayout", version.ref = "gridlayout" }
 androidx-webkit = { group = "androidx.webkit", name = "webkit", version.ref = "webkit" }
 crcalc = { group = "com.hp", name = "crcalc", version.ref = "crcalc" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+compose-gradlePlugin = { group = "org.jetbrains.kotlin", name = "compose-compiler-gradle-plugin", version.ref = "kotlin" }
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+spotless-gradlePlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
+detekt-gradlePlugin = { group = "dev.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
+compose-rules-detekt = { group = "io.nlopez.compose.rules", name = "detekt", version.ref = "composeRules" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+detekt = { id = "dev.detekt", version.ref = "detekt" }
+pvot-android-application = { id = "pvot.android.application" }
+pvot-quality-spotless = { id = "pvot.quality.spotless" }
+pvot-quality-detekt = { id = "pvot.quality.detekt" }

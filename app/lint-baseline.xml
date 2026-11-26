@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 9.5.1" type="baseline" client="gradle" dependencies="true" name="AGP (9.5.1)" variant="all" version="9.5.1">
+
+    <issue
+        id="GestureBackNavigation"
+        message="If intercepting back events, this should be handled through the registration of callbacks; see https://developer.android.com/guide/navigation/custom-back/predictive-back-gesture"
+        errorLine1="            case KeyEvent.KEYCODE_BACK:"
+        errorLine2="                 ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/org/prauga/calculator/Calculator.java"
+            line="540"
+            column="18"/>
+    </issue>
+
+</issues>

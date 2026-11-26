@@ -1280,8 +1280,9 @@ public class Calculator extends AppCompatActivity
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         ViewCompat.setOnApplyWindowInsetsListener(requireViewById(R.id.main_calculator),
             (v, windowInsets) -> {
-                Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
-                v.setPadding(0, insets.top, 0, insets.bottom);
+                Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()
+                        | WindowInsetsCompat.Type.displayCutout());
+                v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
                 return WindowInsetsCompat.CONSUMED;
             });
     }
